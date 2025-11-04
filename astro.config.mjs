@@ -24,7 +24,7 @@ export default defineConfig({
         '@fontsource/sarabun/400.css',
         '@fontsource/sarabun/600.css',
       ],
-      social: [{icon: 'github', label: 'GitHub', href: 'https://github.com/wrong-lang/manao'}],
+      social: [{icon: 'github', label: 'GitHub', href: 'https://github.com/tinarskii/manao'}],
       sidebar: [
         {
           label: 'Guides',

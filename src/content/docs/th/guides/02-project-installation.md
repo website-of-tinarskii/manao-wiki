@@ -18,7 +18,7 @@ title: ติดตั้งโปรเจกต์
 หลังจากเปิด terminal แล้ว ให้รันคำสั่งดังนี้:
 
 ```powershell
-Invoke-WebRequest "https://raw.githubusercontent.com/wrong-lang/manao/refs/heads/main/tools/windows/INSTALLER.ps1" | Invoke-Expression
+Invoke-WebRequest "https://raw.githubusercontent.com/tinarskii/manao/refs/heads/main/tools/windows/INSTALLER.ps1" | Invoke-Expression
 ```
 
 :::note
@@ -27,7 +27,7 @@ URL นี้เป็น **ซอร์สโค้ดของ ManaoInstaller*
 จากนั้น `Invoke-Expression` จะรันสคริปต์นั้น
 :::
 
-ก่อนรันคำสั่งควรจะเช็คที่มาของโค้ดก่อน สามารถเช็คได้ที่[นี่ๆๆๆๆ](https://raw.githubusercontent.com/wrong-lang/manao/refs/heads/main/tools/windows/INSTALLER.ps1) เพื่อความปลอดภัย **อย่าไปรันสคริปต์มั่วซั่วนะ ขอร้อง**
+ก่อนรันคำสั่งควรจะเช็คที่มาของโค้ดก่อน สามารถเช็คได้ที่[นี่ๆๆๆๆ](https://raw.githubusercontent.com/tinarskii/manao/refs/heads/main/tools/windows/INSTALLER.ps1) เพื่อความปลอดภัย **อย่าไปรันสคริปต์มั่วซั่วนะ ขอร้อง**
 
 ---
 

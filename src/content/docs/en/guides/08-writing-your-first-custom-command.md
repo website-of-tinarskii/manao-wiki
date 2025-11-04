@@ -20,8 +20,8 @@ The way ManaoBot handles its custom commands is by running the code dynamically 
 - **initAccount(userID)**: Create a bank account for user if not exists.
 
 **Available variables**
-- **client**: Access to ChatClient, ApiClient, and Socket.IO Client, refer to [ClientServices](https://github.com/wrong-lang/manao/blob/main/types/index.d.ts#L41).
-- **meta**: Collections of useful data, such as user data, refer to [CommandMeta](https://github.com/wrong-lang/manao/blob/main/types/index.d.ts#L47).
+- **client**: Access to ChatClient, ApiClient, and Socket.IO Client, refer to [ClientServices](https://github.com/tinarskii/manao/blob/main/types/index.d.ts#L41).
+- **meta**: Collections of useful data, such as user data, refer to [CommandMeta](https://github.com/tinarskii/manao/blob/main/types/index.d.ts#L47).
 - **message**: The full message received from the chat (E.g. `!command abc`).
 - **args**: An array of user inputs.
 - **language**: Current language. (default is either en/th)

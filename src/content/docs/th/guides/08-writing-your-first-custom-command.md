@@ -22,8 +22,8 @@ title: เขียนคำสั่งแรก
 
 **ตัวแปรที่ใช้งานได้**
 
-* **`client`**: ใช้สำหรับเข้าถึง ChatClient, ApiClient, และ Socket.IO Client, อ้างอิงจาก [ClientServices](https://github.com/wrong-lang/manao/blob/main/types/index.d.ts#L41)
-* **`meta`**: ชุดข้อมูลที่เป็นประโยชน์ เช่น ข้อมูลผู้ใช้, อ้างอิงจาก [CommandMeta](https://github.com/wrong-lang/manao/blob/main/types/index.d.ts#L47)
+* **`client`**: ใช้สำหรับเข้าถึง ChatClient, ApiClient, และ Socket.IO Client, อ้างอิงจาก [ClientServices](https://github.com/tinarskii/manao/blob/main/types/index.d.ts#L41)
+* **`meta`**: ชุดข้อมูลที่เป็นประโยชน์ เช่น ข้อมูลผู้ใช้, อ้างอิงจาก [CommandMeta](https://github.com/tinarskii/manao/blob/main/types/index.d.ts#L47)
 * **`message`**: ข้อความทั้งหมดที่ได้รับจากแชท (เช่น `!command abc`)
 * **`args`**: array ของข้อมูลที่ผู้ใช้พิมพ์เข้ามา
 * **`language`**: ภาษาที่ใช้งานอยู่ (ค่าเริ่มต้นคือ en/th)

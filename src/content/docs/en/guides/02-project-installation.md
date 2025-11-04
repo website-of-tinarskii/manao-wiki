@@ -17,14 +17,14 @@ It is recommended that you download this app at [Microsoft Store](https://apps.m
 After the terminal initiated, run the following command:
 
 ```powershell
-Invoke-WebRequest "https://raw.githubusercontent.com/wrong-lang/manao/refs/heads/main/tools/windows/INSTALLER.ps1" | Invoke-Expression
+Invoke-WebRequest "https://raw.githubusercontent.com/tinarskii/manao/refs/heads/main/tools/windows/INSTALLER.ps1" | Invoke-Expression
 ```
 
 :::note
 **Explanation**: The URL is the source code for the ManaoInstaller, written in powershell. The command "Invoke-WebRequest" is used to retrieve the contents from the URL. Then, "Invoke-Expression" will run the script.
 :::
 
-You can check source code of the installation script [here](https://raw.githubusercontent.com/wrong-lang/manao/refs/heads/main/tools/windows/INSTALLER.ps1) to ensure your safety. Do not execute any suspicious script from the internet!
+You can check source code of the installation script [here](https://raw.githubusercontent.com/tinarskii/manao/refs/heads/main/tools/windows/INSTALLER.ps1) to ensure your safety. Do not execute any suspicious script from the internet!
 
 ---
 
