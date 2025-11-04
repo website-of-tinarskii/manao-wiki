@@ -7,6 +7,10 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Manao',
+      logo: {
+        src: "./public/favicon.svg",
+        replacesTitle: true,
+      },
       defaultLocale: 'th',
       locales: {
         en: {
