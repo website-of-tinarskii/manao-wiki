@@ -3,50 +3,36 @@ title: ติดตั้งโปรเจกต์
 ---
 
 เมื่อได้ **Client ID** และ **Client Secret** แล้ว ก็เริ่มดาวน์โหลดมะนาวได้เลย!
-ตอนนี้บอทยังไม่มีไฟล์ executable (.exe) เดียว ดังนั้นจริงๆแล้วท่านจะต้อง **โคลน repository ด้วยตัวเอง**  
-โชคดีที่เรามี **สคริปต์ติดตั้งอัตโนมัติ** ให้ใช้กันถ้วนหน้า คู่มือนี้ใช้ได้กับ **Windows เท่านั้น**
+ตอนนี้บอตได้มีตัวติตตั้งแบบไฟล์ .exe ให้ใช้กันง่าย ๆ แล้ว! คนใช้ Mac กับ Linux โหลดเองนะ ถือว่าเก่งแล้ว ฮรุก ๆๆ
 
 ---
 
 ### 1. ดาวน์โหลดตัวติดตั้ง
 
-เปิด **แอป Terminal** โดยค้นหา "Terminal" ในแถบค้นหาของเมนูเริ่ม (กดปุ่ม `Windows` แล้วพิมพ์ "terminal") จากนั้นพิมพ์ `powershell` ใน terminal
+โหลดตัวติดตั้งน้องมะนาวได้ที่ลิงก์ด้านล่างนี้:
+- [ManaoBot Installer for Windows](https://github.com/tinarskii/Manao/releases/download/3.0.0/ManaoBotSetup.exe)
 
-ถ้าเป็น Windows ใหม่ ๆ จะมีติดเครื่องให้ ถ้ายังไม่มี แนะนำให้ดาวน์โหลดแอปนี้จาก [Microsoft Store](https://apps.microsoft.com/detail/9N0DX20HK701?hl=en-us&gl=TH&ocid=pdpshare)  
-หรือกด `⊞ Win + R` แล้วพิมพ์ `powershell` จากนั้นกด **Run** หากไม่ต้องการดาวน์โหลดแอป
-
-หลังจากเปิด terminal แล้ว ให้รันคำสั่งดังนี้:
-
-```powershell
-Invoke-WebRequest "https://raw.githubusercontent.com/tinarskii/manao/refs/heads/main/tools/windows/INSTALLER.ps1" | Invoke-Expression
-```
-
-:::note
-URL นี้เป็น **ซอร์สโค้ดของ ManaoInstaller** เขียนด้วย Powershell  
-คำสั่ง `Invoke-WebRequest` ใช้เพื่อดึงเนื้อหาจาก URL  
-จากนั้น `Invoke-Expression` จะรันสคริปต์นั้น
+:::danger
+ถ้าไฟล์อยู่ ๆ ก็หาย ให้เปิด Windows Defender หรือแอนตี้ไวรัสที่ใช้ แล้วกดอนุญาตไฟล์นี้ในส่วนของการกักกันไฟล์ (quarantine) นะจ๊ะ
 :::
 
-ก่อนรันคำสั่งควรจะเช็คที่มาของโค้ดก่อน สามารถเช็คได้ที่[นี่ๆๆๆๆ](https://raw.githubusercontent.com/tinarskii/manao/refs/heads/main/tools/windows/INSTALLER.ps1) เพื่อความปลอดภัย **อย่าไปรันสคริปต์มั่วซั่วนะ ขอร้อง**
+สามารถตรวจสอบซอร์สโค้ดของตัวติดตั้งได้ที่กิตฮับแล้ว build เองได้เลยถ้ากลัวไวรัส (แต่ไม่มีหรอกนะ เชื่อเถอะ อิอิ)
+- [installer.iss](https://github.com/tinarskii/Manao/blob/main/tools/windows/installer.iss) 
+- [INSTALLER.ps1](https://github.com/tinarskii/Manao/blob/main/tools/windows/INSTALLER.ps1) 
 
 ---
 
 ### 2. ขั้นตอนการติดตั้ง
 
-หลังจากรันสคริปต์แล้ว ระบบจะดาวน์โหลดซอฟต์แวร์ที่จำเป็นดังนี้:
+ขั้นตอนมีง่าย ๆ โหลดไฟล์เสร็จก็กดเปิดไฟล์ แค่นี้แหละ เสร็จละ
+กด Next ไปเรื่อย ๆ เดี๋ยวก็เสร็จเอง ไม่ต้องอ่านหรอก ขี้เกียจ 
 
-- **Git**: สำหรับ version control - [เว็บไซต์ทางการ](https://git-scm.com/)
-- **Bun**: JavaScript runtime - [เว็บไซต์ทางการ](https://bun.sh/)
-- **Twitch CLI**: สำหรับจัดการ credentials ของ Twitch - [เว็บไซต์ทางการ](https://dev.twitch.tv/docs/cli/)
+:::tip
+โฟลเดอร์จะติดตั้งที่ `C:\Users\[ชื่อผู้ใช้]\AppData\Local\ManaoBot` \
+อยากเปลี่ยนก็เปลี่ยนได้เลยในขั้นตอนการติดตั้ง
+:::
 
-ระหว่างการติดตั้ง ก็จะมีให้ **ยอมรับข้อตกลงการใช้งาน**  
-แค่พิมพ์ `y` แล้วกด **Enter** หรือคลิก **Allow** ถ้ามีหน้าต่างเด้งขึ้นมา
+ระหว่างติดตั้ง อาจจะมีหน้าต่างคำสั่งน่ากลัว ๆ โผล่ขึ้นมา
+แต่ไม่ต้องกลัวเน้อ น้องไม่กัด เพราะตัวติดตั้งใช้ PowerShell ในการติดตั้งไลบรารีที่จำเป็น ตอนแรกจะซ่อนแหละแต่กลัวดีบั๊กยาก
 
-หาก Git ติดตั้งสำเร็จ จะมีหน้าตาดังนี้:  
-![](https://github.com/user-attachments/assets/6cad454b-e78a-4042-b1cc-f88352005704)  
-เลือกเวอร์ชันที่อยากได้ หรือเว้นว่างเพื่อใช้ **เวอร์ชันล่าสุด**
-
-จากนั้นจะรันสคริปต์ติดตั้ง **Bun** และ **TwitchCLI** หากสำเร็จ จะมีหน้าตาดังนี้:  
-![](https://github.com/user-attachments/assets/e72e3114-9137-49cd-af00-2e82a80bd453)
-
-เว้นว่างแล้วกด `Enter` เพื่อดำเนินการต่อไปยังขั้นตอนการตั้งค่า
+ถ้าเสร็จแล้ว ให้ติ๊ก "Run powershell.exe" (มันติ๊กให้เองแหละ) จะได้รันสคริปต์ตั้งค่า แล้วไปหน้าต่อไปได้เลยยย

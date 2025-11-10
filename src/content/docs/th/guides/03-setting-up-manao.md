@@ -51,9 +51,6 @@ title: ตั้งค่ามะนาว
 
 ![](https://github.com/user-attachments/assets/ec8055fd-2b1a-4776-9fd6-0b9a67d6349c)
 
-กด `y` แล้ว `Enter` เพื่อเปิดโฟลเดอร์ **ManaoBot** ใน File Explorer ได้เลย
+พร้อมใช้งานแล้วจ้า ! ตอนนี้สามารถรันมะนาวได้โดยการค้นหา "Manao Twitch Bot" ในเมนู Start ตัวอย่างตามรูป
 
-จากนั้นสามารถรันบอทได้โดยเข้าไปที่โฟลเดอร์ **ManaoBot**
-เปิดโฟลเดอร์ `tools/windows` แล้วดับเบิลคลิกไฟล์ `START_MANAO.bat`
-
-พร้อมใช้งานแล้วจ้า
+![](https://i.ibb.co/WWrF5NSk/Screenshot-2025-11-11-035107.png)

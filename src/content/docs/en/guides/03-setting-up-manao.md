@@ -40,6 +40,6 @@ After the setup process is finished, you will see something like this:
 
 ![](https://github.com/user-attachments/assets/ec8055fd-2b1a-4776-9fd6-0b9a67d6349c)
 
-Pressing `y` then `Enter` will open the ManaoBot folder in file explorer.
+This indicates that the setup process is complete! You can now run Manao by searching "Manao Twitch Bot" in your Start Menu.
 
-You can run ManaoBot by navigating the ManaoBot folder, then open the `tools/windows` folder, and open the `START_MANAO.bat` file
+![](https://i.ibb.co/WWrF5NSk/Screenshot-2025-11-11-035107.png)
