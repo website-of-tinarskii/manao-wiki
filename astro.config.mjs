@@ -99,6 +99,13 @@ export default defineConfig({
               },
               slug: 'guides/08-writing-your-first-custom-command'
             },
+            {
+              label: 'Connecting to External Events',
+              translations: {
+                th: "เชื่อมต่อกับอีเวนต์ภายนอก"
+              },
+              slug: 'guides/09-connecting-to-external-events'
+            },
           ],
         },
         {
