@@ -11,6 +11,7 @@ title: ติดตั้งโปรเจกต์
 
 โหลดตัวติดตั้งน้องมะนาวได้ที่ลิงก์ด้านล่างนี้:
 - [ManaoBot Installer for Windows](https://github.com/tinarskii/Manao/releases/download/3.0.0/ManaoBotSetup.exe)
+- [ManaoBot Shell Installer Script (MacOS/Linux)](https://raw.githubusercontent.com/tinarskii/Manao/refs/heads/main/tools/linux/INSTALLER.sh)
 
 :::danger
 ถ้าไฟล์อยู่ ๆ ก็หาย ให้เปิด Windows Defender หรือแอนตี้ไวรัสที่ใช้ แล้วกดอนุญาตไฟล์นี้ในส่วนของการกักกันไฟล์ (quarantine) นะจ๊ะ

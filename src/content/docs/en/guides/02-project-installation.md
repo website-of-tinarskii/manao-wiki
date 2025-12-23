@@ -11,6 +11,7 @@ The bot now has an interactive GUI installer that will guide you through the ins
 
 You can download the installer from the link below:
 - [ManaoBot Installer for Windows](https://github.com/tinarskii/Manao/releases/download/3.0.0/ManaoBotSetup.exe)
+- [ManaoBot Shell Installer Script (MacOS/Linux)](https://raw.githubusercontent.com/tinarskii/Manao/refs/heads/main/tools/linux/INSTALLER.sh)
 
 ---
 
