@@ -1,0 +1,44 @@
+---
+title: Account Linking
+---
+
+One of the things that makes Manao Bot stand out from other bots (probably) is its ability to link account data across multiple platforms. Currently, it supports linking Twitch, Kick, and Discord together.
+
+This guide will walk you through how to link your accounts across these platforms using the `link` command.
+
+:::danger
+Streamers must enable the Manao Discord Bot first before they can use the `link` command.
+:::
+
+### Generate a Code
+
+The first step is to generate a verification code. This code is issued by the Manao Discord Bot and acts as the bridge to connect your account across different platforms.
+
+You can generate the code by using the `link` command in a Discord channel where the Manao Discord Bot is present. Simply type:
+
+```
+
+/link
+
+```
+
+The Manao Discord Bot will reply with a 6-character code. You will use this code to link your account to other platforms.
+
+:::tip
+This code is valid for only 1 minute. If it expires, you’ll need to generate a new one.
+Once used, the code cannot be reused. You must generate a new code each time you want to link an account.
+:::
+
+### Link Your Account
+
+After receiving the code, you can use it to link your account to other platforms.
+
+In the Twitch or Kick chat, type:
+
+```
+
+!link [code]
+
+```
+
+And that’s it, your accounts are now linked!

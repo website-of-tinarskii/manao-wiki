@@ -1,0 +1,362 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+export async function getStaticPaths() {
+  const res = await fetch('https://raw.githubusercontent.com/mymanao/Manao/refs/heads/main/docs/data/commands.generated.json');
+  const commands = await res.json();
+
+  const langs = ['en', 'th'];
+  const categories = [...new Set(commands.map(c => c.category))];
+
+  let paths = [];
+
+  for (const lang of langs) {
+    paths.push({
+      params: { lang, slug: undefined },
+      props: { type: 'all', commands, lang }
+    });
+
+    for (const category of categories) {
+      const categoryCommands = commands.filter(c => c.category === category);
+
+      paths.push({
+        params: { lang, slug: category },
+        props: { type: 'category', category, commands: categoryCommands, lang }
+      });
+
+      for (const cmd of categoryCommands) {
+        paths.push({
+          params: { lang, slug: `${category}/${cmd.key}` },
+          props: { type: 'command', command: cmd, lang }
+        });
+      }
+    }
+  }
+
+  return paths;
+}
+
+const { type, commands = [], category, command, lang } = Astro.props;
+
+const t = (obj) => obj?.[lang] || obj?.['en'] || '';
+
+const categoryMap = {
+  moderation: { en: 'Moderation', th: 'จัดการแชท' },
+  economy: { en: 'Economy', th: 'เศรษฐกิจ' },
+  social: { en: 'Social', th: 'โซเชียล' },
+  music: { en: 'Music', th: 'เพลง' },
+  info: { en: 'Information', th: 'ข้อมูล' },
+  preferences: { en: 'Preferences', th: 'การตั้งค่า' }
+};
+
+const translateCategory = (cat) =>
+  categoryMap[cat]?.[lang] || cat;
+
+const platformMap = {
+  twitch: { label: 'Twitch', color: '#7c3aed' },
+  kick: { label: 'Kick', color: '#16a34a' },
+  discord: { label: 'Discord', color: '#4338ca' },
+};
+
+let pageTitle = '';
+
+if (type === 'all') {
+  pageTitle = lang === 'th' ? 'คำสั่งทั้งหมด' : 'All Commands';
+}
+
+if (type === 'category') {
+  pageTitle = `${lang === 'th' ? 'หมวดหมู่' : 'Category'}: ${translateCategory(category)}`;
+}
+
+if (type === 'command') {
+  pageTitle = `${t(command.name)}`;
+}
+
+const sortedCommands = [...commands].sort((a, b) =>
+  (a.name?.en || '').localeCompare(b.name?.en || '')
+);
+---
+
+<StarlightPage frontmatter={{ title: pageTitle }}>
+
+  {(type === 'all' || type === 'category') && (
+    <div>
+
+      <div style="margin-bottom:1.5rem;">
+        <strong>
+          {lang === 'th' ? 'กรองตามแพลตฟอร์ม' : 'Filter by platform'}:
+        </strong>{' '}
+        <button class="platform-btn" data-platform="all">All</button>
+        {Object.entries(platformMap).map(([p, data]) => (
+          <button class="platform-btn" data-platform={p} style="margin-left:6px;">
+            {data.label}
+          </button>
+        ))}
+      </div>
+
+      <div id="commands-list">
+        {sortedCommands.map((cmd) => (
+          <div class="cmd-card" data-platforms={cmd.platforms?.join(',') ?? ''}>
+
+            <div class="cmd-card-header">
+              <div class="cmd-names">
+                <a href={`/${lang}/commands/${cmd.category}/${cmd.key}`}>
+                  <code class="cmd-name-en">{cmd.name?.en}</code>
+                </a>
+                {cmd.name?.th && (
+                  <a href={`/${lang}/commands/${cmd.category}/${cmd.key}`}>
+                    <code class="cmd-name-th">{cmd.name.th}</code>
+                  </a>
+                )}
+              </div>
+              <div class="cmd-platforms">
+                {cmd.platforms?.map(p => {
+                  const data = platformMap[p] || { label: p, color: '#6b7280' };
+                  return (
+                    <span style={`display:inline-block;padding:2px 8px;font-size:0.75rem;font-weight:600;color:white;border-radius:4px;background:${data.color};margin-left:4px;`}>
+                      {data.label}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+
+            <p class="cmd-desc">{t(cmd.description)}</p>
+
+            {type === 'all' && (
+              <div class="cmd-meta">
+                <span class="cmd-meta-label">
+                  {lang === 'th' ? 'หมวดหมู่' : 'Category'}:
+                </span>{' '}
+                <a href={`/${lang}/commands/${cmd.category}`}>
+                  {translateCategory(cmd.category)}
+                </a>
+              </div>
+            )}
+
+          </div>
+        ))}
+      </div>
+
+    </div>
+  )}
+
+  {type === 'command' && (
+    <div>
+
+      <div class="cmd-card" style="margin-bottom:1.5rem;">
+        <div class="cmd-card-header">
+          <div class="cmd-names">
+            <code class="cmd-name-en">{command.name?.en}</code>
+            {command.name?.th && (
+              <code class="cmd-name-th">{command.name.th}</code>
+            )}
+          </div>
+          <div class="cmd-platforms">
+            {command.platforms?.map(p => {
+              const data = platformMap[p] || { label: p, color: '#6b7280' };
+              return (
+                <span style={`display:inline-block;padding:2px 8px;font-size:0.75rem;font-weight:600;color:white;border-radius:4px;background:${data.color};margin-left:4px;`}>
+                  {data.label}
+                </span>
+              );
+            })}
+          </div>
+        </div>
+        <p class="cmd-desc">{t(command.description)}</p>
+        <div class="cmd-meta">
+          <span class="cmd-meta-label">{lang === 'th' ? 'หมวดหมู่' : 'Category'}:</span>{' '}
+          <a href={`/${lang}/commands/${command.category}`}>{translateCategory(command.category)}</a>
+        </div>
+      </div>
+
+      <div class="cmd-card">
+
+        <div class="cmd-detail-section">
+          <div class="cmd-detail-label">{lang === 'th' ? 'สิทธิ์การใช้งาน' : 'Permissions'}</div>
+          <div class="cmd-desc">
+            {command.modsOnly && (
+              <span>{lang === 'th' ? 'เฉพาะผู้ดูแล (Mod)' : 'Moderators only'}</span>
+            )}
+            {command.broadcasterOnly && (
+              <span>{lang === 'th' ? 'เฉพาะเจ้าของช่อง (Broadcaster)' : 'Broadcaster only'}</span>
+            )}
+            {!command.modsOnly && !command.broadcasterOnly && (
+              <span>{lang === 'th' ? 'ทุกคนสามารถใช้ได้' : 'Everyone can use this command'}</span>
+            )}
+          </div>
+        </div>
+
+        <div class="cmd-detail-section">
+          <div class="cmd-detail-label">{lang === 'th' ? 'คำสั่งย่อ (Aliases)' : 'Aliases'}</div>
+          {command.aliases?.[lang]?.length > 0 ? (
+            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+              {command.aliases[lang].map(alias => (
+                <code style="padding:2px 8px;border-radius:4px;">{alias}</code>
+              ))}
+            </div>
+          ) : (
+            <span class="cmd-desc">-</span>
+          )}
+        </div>
+
+        <div class="cmd-detail-section">
+          <div class="cmd-detail-label">{lang === 'th' ? 'อาร์กิวเมนต์' : 'Arguments'}</div>
+          {command.args?.length > 0 ? (
+            <div style="display:flex;flex-direction:column;gap:0.6rem;">
+              {command.args.map(arg => (
+                <div style="display:flex;flex-direction:column;gap:0.2rem;">
+                  <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap;">
+                    <code style="font-size:0.95rem;font-weight:700;">{t(arg.name)}</code>
+                    {arg.required ? (
+                      <span style="font-size:0.75rem;font-weight:600;color:white;background:#dc2626;border-radius:4px;padding:1px 6px;">
+                        {lang === 'th' ? 'จำเป็น' : 'Required'}
+                      </span>
+                    ) : (
+                      <span style="font-size:0.75rem;font-weight:600;color:white;background:#6b7280;border-radius:4px;padding:1px 6px;">
+                        {lang === 'th' ? 'ไม่จำเป็น' : 'Optional'}
+                      </span>
+                    )}
+                  </div>
+                  <small class="cmd-desc">{t(arg.description)}</small>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <span class="cmd-desc">{lang === 'th' ? 'ไม่มี' : 'None'}</span>
+          )}
+        </div>
+
+        <div class="cmd-detail-section" style="margin-bottom:0;">
+          <div class="cmd-detail-label">Platforms</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px;">
+            {command.platforms?.map(p => {
+              const data = platformMap[p] || { label: p, color: '#6b7280' };
+              return (
+                <span style={`display:inline-block;padding:2px 8px;font-size:0.75rem;font-weight:600;color:white;border-radius:4px;background:${data.color};`}>
+                  {data.label}
+                </span>
+              );
+            })}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    </div>
+    )}
+
+    </StarlightPage>
+
+    <style>
+        .cmd-card {
+            border: 1px solid var(--sl-color-gray-5);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            transition: border-color 0.2s;
+        }
+
+        .cmd-card:hover {
+            border-color: var(--sl-color-accent);
+        }
+
+        .cmd-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .cmd-names {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cmd-name-en {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .cmd-name-th {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .cmd-platforms {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .cmd-desc {
+            margin: 0.25rem 0;
+            font-size: 0.9rem;
+            color: var(--sl-color-gray-2);
+        }
+
+        .cmd-meta {
+            margin-top: 0.4rem;
+            font-size: 0.8rem;
+        }
+
+        .cmd-meta-label {
+            color: var(--sl-color-gray-3);
+        }
+
+        .cmd-detail-section {
+            margin-bottom: 1rem;
+        }
+
+        .cmd-detail-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--sl-color-gray-3);
+            margin-bottom: 0.4rem;
+        }
+    </style>
+
+    <script>
+      const buttons = document.querySelectorAll<HTMLButtonElement>('.platform-btn');
+      const cards = document.querySelectorAll<HTMLDivElement>('.cmd-card');
+
+      function applyFilter(platform: string) {
+        cards.forEach(card => {
+          if (platform === 'all') {
+            card.style.display = '';
+          } else {
+            const platforms = card.dataset.platforms?.split(',') ?? [];
+            card.style.display = platforms.includes(platform) ? '' : 'none';
+          }
+        });
+
+        buttons.forEach(btn => {
+          btn.style.fontWeight = btn.dataset.platform === platform ? 'bold' : 'normal';
+          btn.style.textDecoration = btn.dataset.platform === platform ? 'underline' : 'none';
+        });
+
+        const url = new URL(window.location.href);
+        if (platform === 'all') {
+          url.searchParams.delete('platform');
+        } else {
+          url.searchParams.set('platform', platform);
+        }
+        window.history.replaceState({}, '', url.toString());
+      }
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          applyFilter(btn.dataset.platform ?? 'all');
+        });
+      });
+
+      const initial = new URL(window.location.href).searchParams.get('platform') ?? 'all';
+      applyFilter(initial);
+      </script>
